@@ -18,9 +18,8 @@
         </form>
 
         <?php
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
-            $age = intval($_POST['age']);
-
+        if(isset($_POST['age'])){
+            $age=$_POST['age'];
             if ($age < 18) {
                 echo '<div class="alert alert-danger mt-4">You are not eligible for a driving license.</div>';
             } elseif ($age >= 18 && $age <= 70) {
