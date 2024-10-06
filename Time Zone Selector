@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Zone Selector</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <?php
+date_default_timezone_set('UTC');
+
+$currentDateTime = '';
+$epochTime = '';
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $selectedZone = $_POST['timezone'];
+    date_default_timezone_set($selectedZone);
+    $currentDateTime = date('Y-m-d H:i:s');
+    $epochTime = time();
+}
+
+$timezones = timezone_identifiers_list();
+?>
+
+
+    <div class="container mt-5">
+        <h2>Select Time Zone</h2><hr>
+        <form method="POST">
+            <div class="form-group">
+                <label for="timezone">Choose a Time Zone:</label>
+                <select name="timezone" id="timezone" class="form-control" required>
+                    <?php foreach ($timezones as $timezone): ?>
+                        <option value="<?php echo $timezone; ?>">
+                          <?php echo $timezone; ?>
+                        </option>
+                    <?php endforeach; ?>
+                </select>
+            </div>
+            <button type="submit" class="btn btn-primary">Get Time</button>
+        </form>
+
+        <?php if ($currentDateTime): ?>
+            <div class="mt-4">
+                <?php echo $timezone ?>
+                <h4>Current Date and Time: <?php echo $currentDateTime; ?></h4>
+                <h4>Epoch Time: <?php echo $epochTime; ?></h4>
+            </div>
+        <?php endif; ?>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
