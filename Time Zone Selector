@@ -42,7 +42,6 @@ $timezones = timezone_identifiers_list();
 
         <?php if ($currentDateTime): ?>
             <div class="mt-4">
-                <?php echo $timezone ?>
                 <h4>Current Date and Time: <?php echo $currentDateTime; ?></h4>
                 <h4>Epoch Time: <?php echo $epochTime; ?></h4>
             </div>
